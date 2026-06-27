@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel Admin</title>
     <link rel="stylesheet" href="/css/styles.css" />
+    <!-- Librería para leer Excel -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   </head>
   <body>
     <header class="hero compact">
       <div class="container">
         <h1>Panel de administración</h1>
-        <p>Registra pacientes manualmente o por imagen.</p>
+        <p>Registra pacientes manualmente, por imagen o por Excel.</p>
       </div>
     </header>
 
@@ -28,8 +30,10 @@
             <button class="tab active" data-tab="manual">Manual</button>
             <button class="tab" data-tab="ocr">Foto OCR</button>
             <button class="tab" data-tab="bulk">Lista texto</button>
+            <button class="tab" data-tab="excel">📊 Excel</button>
           </div>
 
+          <!-- TAB: MANUAL -->
           <div class="tab-panel active" id="panel-manual">
             <form id="manual-form" class="form-grid">
               <input name="full_name" placeholder="Nombre completo *" required />
@@ -53,6 +57,7 @@
             <div id="manual-message" class="status-text"></div>
           </div>
 
+          <!-- TAB: OCR -->
           <div class="tab-panel" id="panel-ocr">
             <form id="ocr-form" class="form-grid">
               <input type="file" id="ocr-file" accept="image/*" capture="environment" />
@@ -69,6 +74,7 @@
             <div id="ocr-message" class="status-text"></div>
           </div>
 
+          <!-- TAB: BULK TEXTO -->
           <div class="tab-panel" id="panel-bulk">
             <form id="bulk-form" class="form-grid">
               <textarea id="bulk-text" placeholder="Un paciente por línea: Nombre Apellido, 45"></textarea>
@@ -78,6 +84,51 @@
               <button type="submit">Registrar todos</button>
             </form>
             <div id="bulk-message" class="status-text"></div>
+          </div>
+
+          <!-- TAB: EXCEL -->
+          <div class="tab-panel" id="panel-excel">
+            <h3 style="margin-top:0">📊 Cargar Excel de Hospital</h3>
+            <p class="hint">
+              Sube el Excel con la lista de pacientes.
+              El sistema detecta automáticamente las columnas
+              (APELLIDOS Y NOMBRES, EDAD, CÉDULA, TELÉFONO, DIRECCIÓN, OBSERVACIONES).
+            </p>
+
+            <div class="form-grid">
+              <input id="xls-clinic" placeholder="Hospital / Clínica *" list="clinic-list" />
+              <input id="xls-phone" placeholder="Teléfono del hospital" />
+              <input type="password" id="xls-password" placeholder="Contraseña admin" required />
+            </div>
+
+            <div class="upload-zone" onclick="document.getElementById('xls-file').click()">
+              <input type="file" id="xls-file" accept=".xlsx,.xls,.csv" style="display:none" />
+              <div id="xls-upload-label">
+                <span class="big-emoji">📊</span>
+                <p>Toca para seleccionar el Excel</p>
+                <p class="small">Formatos: .xlsx, .xls, .csv</p>
+              </div>
+              <div id="xls-file-info" class="hidden">
+                <p>📄 <strong id="xls-filename"></strong></p>
+                <p>Pacientes detectados: <strong id="xls-row-count">0</strong></p>
+              </div>
+            </div>
+
+            <div id="xls-preview-box" class="hidden">
+              <h4>👁️ Vista previa (primeros 5)</h4>
+              <div id="xls-preview" class="preview-table"></div>
+
+              <button id="xls-upload-btn" type="button">
+                📥 Cargar <span id="xls-total-count">0</span> pacientes
+              </button>
+
+              <div id="xls-progress" class="hidden">
+                <div class="progress-bar"><div id="xls-progress-bar"></div></div>
+                <p id="xls-progress-text">Cargando...</p>
+              </div>
+
+              <div id="xls-message" class="status-text"></div>
+            </div>
           </div>
         </div>
       </section>

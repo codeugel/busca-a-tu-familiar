@@ -48,7 +48,7 @@ body {
   padding: 0.9rem 1rem;
   font-size: 1rem;
 }
-.search-box button, .form-grid button, .admin-login button, #save-ocr-btn {
+.search-box button, .form-grid button, .admin-login button, #save-ocr-btn, #xls-upload-btn {
   border: 0;
   border-radius: 0.75rem;
   background: var(--primary);
@@ -57,7 +57,8 @@ body {
   font-weight: 700;
   cursor: pointer;
 }
-.search-box button:hover, .form-grid button:hover, .admin-login button:hover, #save-ocr-btn:hover { background: var(--primary-dark); }
+.search-box button:hover, .form-grid button:hover, .admin-login button:hover, #save-ocr-btn:hover, #xls-upload-btn:hover { background: var(--primary-dark); }
+#xls-upload-btn:disabled { background: var(--muted); cursor: not-allowed; }
 .status-text { min-height: 1.3rem; margin-top: 0.7rem; color: var(--muted); }
 .results-section { padding: 1.5rem 0 3rem; }
 .loading {
@@ -108,6 +109,144 @@ body {
 .ocr-list { display: grid; gap: 0.75rem; margin-top: 1rem; }
 .ocr-item { display: flex; align-items: center; gap: 0.7rem; padding: 0.75rem; border: 1px solid var(--border); border-radius: 0.75rem; }
 .hidden { display: none !important; }
+
+/* ===========================================
+   PROGRESS BAR (mejorada para OCR y Excel)
+   =========================================== */
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 0.8rem 0;
+}
+.progress-bar > div {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 999px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+/* ===========================================
+   EXCEL UPLOADER
+   =========================================== */
+.hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.upload-zone {
+  border: 3px dashed var(--border);
+  border-radius: 1rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #fafbfc;
+}
+
+.upload-zone:hover {
+  border-color: var(--primary);
+  background: #f0f7ff;
+}
+
+.upload-zone p {
+  margin: 0.4rem 0;
+  color: var(--muted);
+}
+
+.big-emoji {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.small {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+#xls-file-info {
+  text-align: center;
+}
+
+#xls-file-info p {
+  margin: 0.3rem 0;
+  color: var(--text);
+}
+
+.preview-table {
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: white;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.preview-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.preview-table th {
+  background: #f0f4f8;
+  padding: 0.7rem 0.9rem;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+  font-weight: 700;
+  color: var(--text);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.preview-table td {
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.preview-table tr:last-child td {
+  border-bottom: none;
+}
+
+.preview-table tr:hover td {
+  background: #f8f9fa;
+}
+
+#xls-preview-box h4 {
+  margin: 1.2rem 0 0.5rem;
+  color: var(--text);
+}
+
+#xls-progress {
+  margin-top: 1rem;
+}
+
+#xls-progress-text {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0.4rem 0;
+}
+
+#panel-excel h3 {
+  color: var(--text);
+}
+
+#xls-upload-btn {
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 1.05rem;
+}
+
 @media (min-width: 768px) {
   .results-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
