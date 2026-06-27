@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Busca a tu Familiar</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="container">
+        <h1>Busca a tu Familiar</h1>
+        <p>Encuentra pacientes ingresados en clínicas de forma rápida y segura.</p>
+        <form id="search-form" class="search-box">
+          <input id="search-input" type="text" placeholder="Buscar por nombre o cédula" autocomplete="off" />
+          <button type="submit">Buscar</button>
+        </form>
+        <div id="search-status" class="status-text"></div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="results-section">
+        <div id="loading" class="loading hidden">Buscando...</div>
+        <div id="results" class="results-grid"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-content">
+        <div>
+          <strong>Registrados:</strong> <span id="stat-patients">0</span>
+        </div>
+        <div>
+          <strong>Clínicas:</strong> <span id="stat-clinics">0</span>
+        </div>
+        <div>
+          <strong>Búsquedas:</strong> <span id="stat-searches">0</span>
+        </div>
+        <a href="/admin.html">Panel admin</a>
+      </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+  </body>
+</html>

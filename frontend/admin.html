@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel Admin</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header class="hero compact">
+      <div class="container">
+        <h1>Panel de administración</h1>
+        <p>Registra pacientes manualmente o por imagen.</p>
+      </div>
+    </header>
+
+    <main class="container admin-shell">
+      <section class="card">
+        <div class="admin-login" id="login-panel">
+          <h2>Acceso admin</h2>
+          <input id="admin-password" type="password" placeholder="Contraseña" />
+          <button id="login-btn">Entrar</button>
+          <p id="login-message" class="status-text"></p>
+        </div>
+
+        <div id="admin-panel" class="hidden">
+          <div class="tabs">
+            <button class="tab active" data-tab="manual">Manual</button>
+            <button class="tab" data-tab="ocr">Foto OCR</button>
+            <button class="tab" data-tab="bulk">Lista texto</button>
+          </div>
+
+          <div class="tab-panel active" id="panel-manual">
+            <form id="manual-form" class="form-grid">
+              <input name="full_name" placeholder="Nombre completo *" required />
+              <input name="cedula" placeholder="Cédula" />
+              <input name="age" placeholder="Edad" />
+              <input name="clinic_name" id="clinic-manual" list="clinic-list" placeholder="Clínica *" required />
+              <input name="clinic_address" placeholder="Dirección clínica" />
+              <input name="clinic_phone" placeholder="Teléfono clínica" />
+              <input name="building" placeholder="Edificio / piso" />
+              <input name="contact_phone" placeholder="Teléfono contacto" />
+              <input name="contact_name" placeholder="Nombre contacto" />
+              <select name="status">
+                <option value="ingresado">Ingresado</option>
+                <option value="alta">Alta</option>
+                <option value="pendiente">Pendiente</option>
+              </select>
+              <textarea name="notes" placeholder="Notas"></textarea>
+              <input type="password" name="admin_password" placeholder="Contraseña admin" required />
+              <button type="submit">Guardar paciente</button>
+            </form>
+            <div id="manual-message" class="status-text"></div>
+          </div>
+
+          <div class="tab-panel" id="panel-ocr">
+            <form id="ocr-form" class="form-grid">
+              <input type="file" id="ocr-file" accept="image/*" capture="environment" />
+              <input id="ocr-clinic" placeholder="Clínica" />
+              <input id="ocr-phone" placeholder="Teléfono clínica" />
+              <input type="password" id="ocr-password" placeholder="Contraseña admin" required />
+              <button type="submit">Procesar imagen</button>
+            </form>
+            <div id="ocr-progress" class="progress-bar"><div></div></div>
+            <img id="ocr-preview" class="preview hidden" alt="Vista previa" />
+            <pre id="ocr-raw" class="raw-output"></pre>
+            <div id="ocr-list" class="ocr-list"></div>
+            <button id="save-ocr-btn" class="hidden">Guardar seleccionados</button>
+            <div id="ocr-message" class="status-text"></div>
+          </div>
+
+          <div class="tab-panel" id="panel-bulk">
+            <form id="bulk-form" class="form-grid">
+              <textarea id="bulk-text" placeholder="Un paciente por línea: Nombre Apellido, 45"></textarea>
+              <input id="bulk-clinic" placeholder="Clínica" />
+              <input id="bulk-phone" placeholder="Teléfono clínica" />
+              <input type="password" id="bulk-password" placeholder="Contraseña admin" required />
+              <button type="submit">Registrar todos</button>
+            </form>
+            <div id="bulk-message" class="status-text"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <datalist id="clinic-list"></datalist>
+    <script src="/js/admin.js"></script>
+  </body>
+</html>
